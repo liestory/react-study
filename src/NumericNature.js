@@ -6,7 +6,6 @@ import {Button, InputNumber} from 'antd';
 
 class NumericNature extends React.Component {
 
-
     constructor(props) {
         super(props);
         this.state = {value: 0};
@@ -18,9 +17,10 @@ class NumericNature extends React.Component {
         console.log({value})
     };
 
-    onSetSum = (sum) => {
-        this.setState({sum});
+    getSum = (state) => {
+        return {sum: state.value * (state.value + 1) / 2};
     }
+
 
     render() {
         return (
@@ -29,7 +29,7 @@ class NumericNature extends React.Component {
                              onChange={this.onChange}/>
                 <Button
                     type="primary"
-                    onClick={() => this.sumNature(this.state.value)}
+                    onClick={() => this.setState(this.getSum)}
                 >
                     Click me!
                 </Button>
@@ -39,12 +39,6 @@ class NumericNature extends React.Component {
             </div>
 
         );
-    }
-
-    sumNature(value) {
-        console.log({value});
-        return this.onSetSum(value * (value + 1) / 2);
-        console.log(this.state.sum);
     }
 }
 
