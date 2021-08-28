@@ -25,7 +25,7 @@ class NumericNature extends React.Component {
     render() {
         return (
             <div>
-                <InputNumber style={{width: 120}} value={this.state.value} min={1} max={10} defaultValue={3}
+                <InputNumber style={{width: 120}} value={this.state.value} min={1} max={10} defaultValue={0}
                              onChange={this.onChange}/>
                 <Button
                     type="primary"
