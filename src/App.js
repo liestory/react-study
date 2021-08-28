@@ -1,25 +1,64 @@
 import logo from './logo.svg';
 import './App.css';
+import React, {Component} from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+
+    static defaultProps = {
+        name: 'App',
+        description: 'Application',
+        version: '1.0.0',
+        emptyFunction: function () {
+            return this;
+        },
+        rowFunction: () => this,
+        a: 0
+    }
+
+
+    constructor(props) {
+        super(props);
+        const {obj1, obj2, h1, h2, emptyFunction} = props;
+        console.log(props);
+        console.log(obj1 === obj2);
+        console.log(h1 === h2);
+        emptyFunction.bind(this);
+
+    }
+
+    //-------------------------------------
+    render() {
+        const {emptyFunction, rowFunction} = this.props;
+
+        console.log(emptyFunction());
+        console.log(rowFunction());
+        return (
+            <div>
+                <header className="App-header">
+                    <img src={logo} className="App-logo" alt="logo"/>
+                </header>
+                <content/>
+                <footer>
+                    <code>
+                        {JSON.stringify(this.props, null, 2)}
+                    </code>
+                    <pre>
+                        {JSON.stringify(this.props, null, 2)}
+                    </pre>
+                </footer>
+            </div>
+        );
+    }
 }
+
+/*
+App.defaultProps = {
+    name: 'App',
+    description: 'Application',
+    version: '1.0.0'
+}
+*/
+
 
 export default App;
