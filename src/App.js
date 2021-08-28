@@ -1,62 +1,81 @@
-import logo from './logo.svg';
 import './App.css';
 import React, {Component} from 'react';
 
 
 class App extends Component {
 
+    state = {
+        name: "puck",
+        count: 0,
+
+    }
+
     static defaultProps = {
         name: 'App',
         description: 'Application',
         version: '1.0.0',
-        emptyFunction: function () {
-            return this;
-        },
-        rowFunction: () => this,
         a: 0
     }
 
 
     constructor(props) {
         super(props);
-        const {obj1, obj2, h1, h2, emptyFunction} = props;
-        console.log(props);
-        console.log(obj1 === obj2);
-        console.log(h1 === h2);
-        emptyFunction.bind(this);
+        this.increment = this.increment.bind(this);
 
+    };
+
+    increment() {
+        this.setState(this.setStateIncrement)
+    };
+
+
+    setStateIncrement = (state, props) => {
+        console.log(state, props);
+        return {
+            ...this.state,
+            count: ++state.count,
+            name: props.name,
+        }
     }
+
+    incrementExtra = () => {
+        this.setState({...this.state, count: this.state.count + 2});
+    };
+
+    decrement = () => {
+        let {count} = this.state
+        this.setState({...this.state, count: --count});
+    };
 
     //-------------------------------------
     render() {
-        const {emptyFunction, rowFunction, children} = this.props;
+        const {children} = this.props;
+        const {name, count} = this.state;
 
-        console.log(emptyFunction());
-        console.log(rowFunction());
         return (
             <div>
                 {children}
-                <content/>
+                <article>
+                    {name}
+                </article>
+                <article>
+                    <button onClick={this.increment}>
+                        Plus
+                    </button>
+                    <button onClick={this.incrementExtra}>
+                        Plus Extra
+                    </button>
+                    {count}
+                    <button onClick={this.decrement}>
+                        Minus
+                    </button>
+                </article>
                 <footer>
-                    <code>
-                        {JSON.stringify(this.props, null, 2)}
-                    </code>
-                    <pre>
-                        {JSON.stringify(this.props, null, 2)}
-                    </pre>
                 </footer>
             </div>
         );
     }
 }
-
-/*
-App.defaultProps = {
-    name: 'App',
-    description: 'Application',
-    version: '1.0.0'
-}
-*/
 
 
 export default App;
