@@ -29,15 +29,13 @@ class App extends Component {
 
     //-------------------------------------
     render() {
-        const {emptyFunction, rowFunction} = this.props;
+        const {emptyFunction, rowFunction, children} = this.props;
 
         console.log(emptyFunction());
         console.log(rowFunction());
         return (
             <div>
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                </header>
+                {children}
                 <content/>
                 <footer>
                     <code>
