@@ -13,10 +13,12 @@ class Clock extends React.Component {
 
 
     componentDidMount() {
+        console.log('componentDidMount')
         setInterval(() => this.tick(), 1000);
     };
 
     componentWillUnmount() {
+        console.log('componentWillUnmount')
         clearInterval(this.time)
     };
 
@@ -24,14 +26,10 @@ class Clock extends React.Component {
         this.setState({
             date: new Date()
         });
-        console.log("tick");
     };
 
-    onDelete = () => {
-
-    }
-
     render() {
+        console.log('render')
         return (
             <div>
                 <h1>Clock</h1>
