@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      listNumbers: [1, 3, 2, 5]
+    }
+  }
+
+
+  render() {
+    return (
+        <div>
+          <h2>Список чисел с + 3</h2>
+          <div>
+            <ul>
+              {this.state.listNumbers.map((listNumber, index) => <li key={index.toString()}> {listNumber + 3}</li>)}
+            </ul>
+          </div>
+        </div>
+    )
+  }
 }
 
 export default App;
