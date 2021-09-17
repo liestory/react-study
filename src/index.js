@@ -1,17 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import Products from "./Products";
+
+
+const ExampleComponent = () => (
+    <div>
+        {[
+            <div>1</div>,
+            <div>2</div>,
+            <div>3</div>,
+            <div>4</div>,
+            <div>5</div>,
+
+        ]}
+    </div>
+)
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <Products/>,
+    document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
