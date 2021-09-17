@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import ArticleList from './ArticleList'
+import articles from './fixtures'
+import 'bootstrap/dist/css/bootstrap.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+    state = {
+        reverted: false
+    }
+
+
+    revert = () => this.setState({
+        reverted: !this.state.reverted
+    })
+
+    render() {
+        return (
+            <div className="container">
+                <div className="jumbotron">
+                    <h1 className="display-3">
+                        App name
+                        <button className="btn" onClick={this.revert}>Revert</button>
+                    </h1>
+                </div>
+                <ArticleList articles={this.state.reverted ? articles.reverse() : articles}/>
+            </div>
+        )
+    }
 }
 
 export default App;
