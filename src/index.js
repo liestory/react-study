@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import FormComponent from './FormComponent';
 import reportWebVitals from './reportWebVitals';
 
+const App = () => <FormComponent />
 ReactDOM.render(
   <React.StrictMode>
     <App />
