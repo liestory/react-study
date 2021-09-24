@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
+
+import CitiesList from "./CitiesList";
+import City from "./City";
 
 function App() {
+    const [cities, setCities] = useState([
+        {name: "Москва", description: "Столица России"},
+        {name: "Зеленоград", description: "Научный спутник Москвы"},
+    ]);
+
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const handlerChangeCity = (n, description) => {
+        setCities(
+            cities.map((city, index) => {
+                if (index === n) {
+                    return {
+                        ...city,
+                        description,
+                    };
+                }
+
+                return city;
+            })
+        );
+    };
+
+    const handlerSelectCity = (n) => setCurrentIndex(n);
+
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
+        <div>
+            <City
+                cities={cities}
+                onChangeCity={handlerChangeCity}
+                currentIndex={currentIndex}
+            />
+            <CitiesList cities={cities} onSelectCity={handlerSelectCity}/>
         </div>
     );
 }
