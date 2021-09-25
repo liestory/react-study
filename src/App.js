@@ -4,7 +4,7 @@ import React, {forwardRef, useImperativeHandle} from 'react';
 
 function MyInput(props, ref) {
     const inputRef = React.useRef();
-    
+
     useImperativeHandle(ref, () => ({
         focus: () => {
             inputRef.current.focus();
