@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+import React, {useContext} from 'react';
 import './App.css';
 
 function App() {
+
+    const myContext = React.createContext(1);
+
+    const Comp1 = () => {
+        const count = useContext(myContext);
+        return <h2>{count}</h2>
+    }
+
+
+    const Comp2 = () => <Comp1/>
+    const Comp3 = () => <Comp2/>
+
+    const CompCheck = () => <myContext.Provider value={1}><Comp3/></myContext.Provider>
+
     return (
         <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
+            <CompCheck/>
         </div>
     );
 }
