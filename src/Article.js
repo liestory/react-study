@@ -36,7 +36,7 @@ class Article extends React.PureComponent {
     render() {
         const {article, isOpen} = this.props;
         const style = {width: '50%'}
-        const body = isOpen && <section className='card-text'>{article.text}</section> < /section>
+        const body = isOpen && <section className="card-text">{article.text}</section>
         return (
             <div className="card mx-auto" style={style}>
                 <div className="card-header">
