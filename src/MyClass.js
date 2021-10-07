@@ -9,6 +9,7 @@ class MyClass extends React.Component {
         ]
     };
 
+
     updateState(idx) {
         const arr = this.state.date;
         // const result = [
@@ -23,4 +24,19 @@ class MyClass extends React.Component {
             date: result
         })
     }
+
+    render() {
+        let obj = [{name: 'Cap of coffee', active: true}];
+
+        return (
+            <div>
+                <ul>
+                    {this.state.date.map((d, i) => <li key={i.toString()}>{d}</li>)}
+                </ul>
+                <button onClick={() => this.updateState(obj)}>Update</button>
+            </div>
+        )
+    }
 }
+
+export default MyClass;
