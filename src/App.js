@@ -16,8 +16,8 @@ function App() {
             dispatch({
                 type: 'add',
                 payload: todoTitle
-            })
-            setTodoTitle('')
+            });
+            setTodoTitle('');
         }
     }
 
