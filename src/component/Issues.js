@@ -1,8 +1,14 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table'
 import axios from "axios";
+import Linkify from 'react-linkify';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import Button from 'react-bootstrap/Button'
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
+import CreateIssueModal from "./CreateIssueModal";
 
-const token = "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";
+const token = "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";
 
 class Issues extends React.Component {
 
@@ -12,8 +18,10 @@ class Issues extends React.Component {
 
         this.state = {
             results: null,
+            createIssueModal: false,
         }
     }
+
 
     getIssues = async () => {
         let response = await axios.get(
@@ -68,13 +76,6 @@ class Issues extends React.Component {
         return response
     }
 
-    componentDidMount() {
-
-        if (this.state.results === null) {
-            this.getIssues().then(data => this.setState({results: data.data}))
-            // .catch(err => { /*...handle the error...*/});
-        }
-    }
 
     linkIssue = (rowData) => {
         return (
@@ -84,12 +85,37 @@ class Issues extends React.Component {
         );
     }
 
+    componentDidMount() {
+
+        if (this.state.results === null) {
+            this.getIssues().then(data => this.setState({results: data.data}))
+            // .catch(err => { /*...handle the error...*/});
+        }
+    }
+
+
 
     render() {
         console.log("results ", this.state.results);
         return (
             //
             <div style={{'margin': '10px'}}>
+                <ButtonToolbar aria-label="Toolbar with button groups">
+                    <ButtonGroup size="lg" aria-label="Basic example">
+                        <Button variant="secondary" onClick={() => this.setState({createIssueModal: true})}>Create
+                            Issue</Button>
+                        <Button variant="secondary">Refresh</Button>
+                    </ButtonGroup>
+                </ButtonToolbar>
+
+                <CreateIssueModal
+
+                    show={this.state.createIssueModal}
+                    onHide={() => this.setState({createIssueModal: false})}
+
+
+                />
+
                 <Table responsive="sm" variant="light">
                     <thead>
                     <tr>
@@ -112,7 +138,7 @@ class Issues extends React.Component {
                             <td>{result.created_at}</td>
                             <td>{result.number}</td>
                             <td>{result.title}</td>
-                            <td>{result.user.html_url}</td>
+                            <td><Linkify>{result.user.html_url}</Linkify></td>
                             <td></td>
                             <td>
                                 <svg version="1.1" width="32" height="32" viewBox="0 0 16 16"
