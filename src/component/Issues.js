@@ -2,28 +2,7 @@ import React from 'react';
 import Table from 'react-bootstrap/Table'
 import axios from "axios";
 
-
-// async function getIssues() {
-//     const octokit = new Octokit({auth: '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'});
-//     const response = await octokit.request('GET /repos/liestory/react-study/issues'
-//         ,{
-//         org: 'liestory',
-//         repo: 'react-study'
-//     }
-//     )
-//     return response;
-// }
-
-
-// await octokit.request('GET /repos/{owner}/{repo}/issues', {
-//     owner: 'octocat',
-//     repo: 'hello-world'
-// })
-
 const token = "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";
-
-const authHeader =
-    "token " + atob("Z2hwX2pWWDJaaDVsZTZFM0JobTlSSHZmejdWeHpxTGtHdDFhV0ZMbA==");
 
 class Issues extends React.Component {
 
@@ -41,7 +20,7 @@ class Issues extends React.Component {
             "https://api.github.com/repos/liestory/Study/issues?state=all",
             {
                 headers: {
-                    Authorization: "Basic " + btoa("liestory:" + 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),
+                    Authorization: "Basic " + btoa("liestory:" + token),
                     // "Authorization": "token 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",
                 },
             }

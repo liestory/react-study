@@ -19,12 +19,12 @@ div, textarea, table, td, th, code, pre, samp {
     width: 30%;
 }
 
-.links{
+.links {
     float: left;
     width: 30%;
 }
 
-.lesson{
+.lesson {
     float: right;
     width: 60%;
 }
