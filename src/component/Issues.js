@@ -10,13 +10,14 @@ import CreateIssueModal from "./CreateIssueModal";
 
 const token = "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";
 
-class Issues extends React.Component {
+class Issues extends React.Component  {
 
 
     constructor(props) {
         super(props);
 
         this.state = {
+            issues: null,
             results: null,
             createIssueModal: false,
         }
@@ -29,47 +30,6 @@ class Issues extends React.Component {
             {
                 headers: {
                     Authorization: "Basic " + btoa("liestory:" + token),
-                    // "Authorization": "token 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",
-                },
-            }
-        )
-        return response
-    }
-
-
-    createIssue = async (body) => {
-        let response = await axios.post(
-            "https://api.github.com/repos/liestory/Study/issues",
-            {
-                headers: {
-                    "Authorization": "token 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",
-                },
-                body,
-            }
-        )
-        return response
-    }
-
-
-    updateIssues = async (number, body) => {
-        let response = await axios.get(
-            "https://api.github.com/repos/liestory/Study/issues/" + number,
-            {
-                headers: {
-                    "Authorization": "Basic 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",
-                },
-                body,
-            }
-        )
-        return response
-    }
-
-    deleteIssues = async (number) => {
-        let response = await axios.get(
-            "https://api.github.com/repos/liestory/Study/issues/" + number,
-            {
-                headers: {
-                    "Authorization": "Basic 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",
                 },
             }
         )
