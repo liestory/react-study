@@ -1,4 +1,4 @@
-import {CREATE_ISSUE_STATE, DELETE_ISSUE_STATE, GET_ISSUE_STATE, UPDATE_ISSUE_STATE,} from "../actions/git"
+import {CREATE_ISSUE_STATE, DELETE_ISSUE_STATE, GET_ISSUE_STATE, UPDATE_ISSUE_STATE, GET_ISSUE} from "../actions/git"
 
 const initialState = {
     issues: null
@@ -17,6 +17,12 @@ const gitReducer = (state = initialState, action) => {
                 ...state,
                 issues: action.payload
             };
+        case GET_ISSUE:
+            return {
+                ...state,
+                issues: action.payload
+            };
+
         case GET_ISSUE_STATE:
             return {
                 ...state,

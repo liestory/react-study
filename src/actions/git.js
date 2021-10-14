@@ -3,6 +3,7 @@ import React from "react";
 
 export const CREATE_ISSUE_STATE = "CREATE_ISSUE_STATE";
 export const UPDATE_ISSUE_STATE = "UPDATE_ISSUE_STATE";
+export const GET_ISSUE = "GET_ISSUE";
 export const GET_ISSUE_STATE = "GET_ISSUE_STATE"
 export const DELETE_ISSUE_STATE = "DELETE_ISSUE_STATE"
 
@@ -14,10 +15,10 @@ export const setDeleteIssueState = (value) => ({type: DELETE_ISSUE_STATE, payloa
 
 const token = atob("Z2hwXzFRSEhLeXhGWnVtMzJJVmRqSVo2N2QzOW42Tmc4NjFseE5EMA==");
 
-export const createIssue =  (body) => {
-    return async dispatch => {
+export const createIssue = (body) => {
+    return async (dispatch) => {
         await axios.post(
-            "https://api.github.com/repos/liestory/Study/issues",
+            "https://api.github.com/repos/liestory/react-study/issues",
             {
                 headers: {
                     Authorization: "token " + token,
@@ -31,10 +32,10 @@ export const createIssue =  (body) => {
 }
 
 
-export const updateIssue =  (number, body) => {
-    return async dispatch => {
+export const updateIssue = (number, body) => {
+    return async (dispatch) => {
         await axios.get(
-            "https://api.github.com/repos/liestory/Study/issues/" + number,
+            "https://api.github.com/repos/liestory/react-study/issues/" + number,
             {
                 headers: {
                     Authorization: "token " + token,
@@ -49,24 +50,27 @@ export const updateIssue =  (number, body) => {
 
 
 export const getIssues =  () => {
-    return async dispatch => {
+    return async (dispatch) => {
         await axios.get(
-            "https://api.github.com/repos/liestory/Study/issues?state=all",
+            "https://api.github.com/repos/liestory/react-study/issues?state=all",
             {
                 headers: {
                     Authorization: "token " + token,
                 },
             }
         ).then((res) => {
+            console.log("res", res.data)
             dispatch(setGetIssueState(res.data))
+            console.log("dispatch", )
         })
     }
 }
 
-export const deleteIssues =  (number) => {
-    return async dispatch => {
+
+export const deleteIssues = (number) => {
+    return async (dispatch) => {
         await axios.get(
-            "https://api.github.com/repos/liestory/Study/issues/" + number,
+            "https://api.github.com/repos/liestory/react-study/issues/" + number,
             {
                 headers: {
                     Authorization: "token " + token,

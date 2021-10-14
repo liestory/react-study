@@ -11,7 +11,7 @@ import {
 
 const mapStateToProps = (state) => {
     return {
-        issues: state.git.issues
+        issues: state.gitRed.issues
     }
 }
 
