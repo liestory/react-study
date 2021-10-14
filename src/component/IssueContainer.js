@@ -2,6 +2,11 @@ import React from "react";
 import {connect} from 'react-redux';
 import Issues from "./Issues";
 import {withRouter} from "react-router";
+import {
+    createIssue,
+    getIssues, updateIssue,
+    deleteIssues
+} from "../actions/git";
 
 
 const mapStateToProps = (state) => {
@@ -12,7 +17,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // createIssue: (issue) => dispatch((issue))
+        createIssue: (body) => dispatch(createIssue(body)),
+        getIssues: () => dispatch(getIssues()),
+        updateIssue: (number, body) => dispatch(updateIssue(number, body)),
+        deleteIssues: (number) => dispatch(deleteIssues(number))
+
     }
 }
 

@@ -1,17 +1,9 @@
 import axios from "axios";
 import React from "react";
 
-
-// export const CREATE_ISSUE = "CREATE_ISSUE";
 export const CREATE_ISSUE_STATE = "CREATE_ISSUE_STATE";
-
-// export const UPDATE_ISSUE = "UPDATE_ISSUE";
 export const UPDATE_ISSUE_STATE = "UPDATE_ISSUE_STATE";
-
-// export const GET_ISSUE = "GET_ISSUE";
 export const GET_ISSUE_STATE = "GET_ISSUE_STATE"
-
-// export const DELETE_ISSUE = "DELETE_ISSUE"
 export const DELETE_ISSUE_STATE = "DELETE_ISSUE_STATE"
 
 export const setCreateIssueState = (value) => ({type: CREATE_ISSUE_STATE, payload: value})
@@ -20,13 +12,15 @@ export const setGetIssueState = (value) => ({type: GET_ISSUE_STATE, payload: val
 export const setDeleteIssueState = (value) => ({type: DELETE_ISSUE_STATE, payload: value})
 
 
-const createIssue = async (body) => {
+const token = atob("Z2hwXzFRSEhLeXhGWnVtMzJJVmRqSVo2N2QzOW42Tmc4NjFseE5EMA==");
+
+export const createIssue =  (body) => {
     return async dispatch => {
         await axios.post(
             "https://api.github.com/repos/liestory/Study/issues",
             {
                 headers: {
-                    uthorization: "Basic " + btoa("liestory:" + token),
+                    Authorization: "token " + token,
                 },
                 body,
             }
@@ -37,13 +31,13 @@ const createIssue = async (body) => {
 }
 
 
-const updateIssues = async (number, body) => {
+export const updateIssue =  (number, body) => {
     return async dispatch => {
         await axios.get(
             "https://api.github.com/repos/liestory/Study/issues/" + number,
             {
                 headers: {
-                    uthorization: "Basic " + btoa("liestory:" + token),
+                    Authorization: "token " + token,
                 },
                 body,
             }
@@ -54,14 +48,13 @@ const updateIssues = async (number, body) => {
 }
 
 
-const getIssues = async () => {
+export const getIssues =  () => {
     return async dispatch => {
         await axios.get(
             "https://api.github.com/repos/liestory/Study/issues?state=all",
             {
                 headers: {
-                    Authorization: "Basic " + btoa("liestory:" + token),
-                    // "Authorization": "token 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",
+                    Authorization: "token " + token,
                 },
             }
         ).then((res) => {
@@ -70,13 +63,13 @@ const getIssues = async () => {
     }
 }
 
-const deleteIssues = async (number) => {
+export const deleteIssues =  (number) => {
     return async dispatch => {
         await axios.get(
             "https://api.github.com/repos/liestory/Study/issues/" + number,
             {
                 headers: {
-                    uthorization: "Basic " + btoa("liestory:" + token),
+                    Authorization: "token " + token,
                 },
             }
         ).then((res) => {
@@ -86,7 +79,7 @@ const deleteIssues = async (number) => {
 }
 
 
-const linkIssue = (rowData) => {
+export const linkIssue = (rowData) => {
     return (
         <a href={`${rowData.html_url}`} target="_blank" rel="noreferrer">
             <i className="pi pi-github" style={{fontSize: "2em"}}></i>
@@ -95,15 +88,20 @@ const linkIssue = (rowData) => {
 }
 
 
-export default {
-    setCreateIssueState,
-    setUpdateIssueState,
-    setGetIssueState,
-    setDeleteIssueState,
-
-    getIssues,
-    createIssue,
-    updateIssues,
-    deleteIssues,
-    linkIssue
-};
+// export default {
+//     CREATE_ISSUE_STATE,
+//     UPDATE_ISSUE_STATE,
+//     GET_ISSUE_STATE,
+//     DELETE_ISSUE_STATE,
+//
+//     setCreateIssueState,
+//     setUpdateIssueState,
+//     setGetIssueState,
+//     setDeleteIssueState,
+//
+//     getIssues,
+//     createIssue,
+//     updateIssue,
+//     deleteIssues,
+//     linkIssue
+// };
