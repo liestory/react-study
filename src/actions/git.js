@@ -15,15 +15,16 @@ export const setDeleteIssueState = (value) => ({type: DELETE_ISSUE_STATE, payloa
 
 const token = atob("Z2hwXzFRSEhLeXhGWnVtMzJJVmRqSVo2N2QzOW42Tmc4NjFseE5EMA==");
 
-export const createIssue = (body) => {
+export const createIssue = (title, body) => {
     return async (dispatch) => {
         await axios.post(
             "https://api.github.com/repos/liestory/react-study/issues",
+            {title: title, body: body},
             {
                 headers: {
                     Authorization: "token " + token,
                 },
-                body,
+
             }
         ).then((res) => {
             dispatch(setCreateIssueState(res.data))
@@ -36,11 +37,11 @@ export const updateIssue = (number, body) => {
     return async (dispatch) => {
         await axios.get(
             "https://api.github.com/repos/liestory/react-study/issues/" + number,
+            {body: body},
             {
                 headers: {
                     Authorization: "token " + token,
                 },
-                body,
             }
         ).then((res) => {
             dispatch(setUpdateIssueState(res.data))
@@ -49,7 +50,7 @@ export const updateIssue = (number, body) => {
 }
 
 
-export const getIssues =  () => {
+export const getIssues = () => {
     return async (dispatch) => {
         await axios.get(
             "https://api.github.com/repos/liestory/react-study/issues?state=all",
@@ -61,7 +62,7 @@ export const getIssues =  () => {
         ).then((res) => {
             console.log("res", res.data)
             dispatch(setGetIssueState(res.data))
-            console.log("dispatch", )
+            console.log("dispatch",)
         })
     }
 }

@@ -8,7 +8,7 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import CreateIssueModal from "./CreateIssueModal";
 
 
-class Issues extends React.Component {
+class Issues extends React. PureComponent {
 
 
     constructor(props) {
@@ -29,6 +29,9 @@ class Issues extends React.Component {
         })
     }
 
+    componentDidUpdate(prevProps, prevState) {
+
+    }
 
     render() {
         console.log("issues ", this.state.issues);
@@ -48,6 +51,7 @@ class Issues extends React.Component {
                     show={this.state.createIssueModal}
                     onHide={() => this.setState({createIssueModal: false})}
 
+                    createIssue={this.props.createIssue}
 
                 />
 

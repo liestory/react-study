@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createIssue: (body) => dispatch(createIssue(body)),
+        createIssue: (title, body) => dispatch(createIssue(title, body)),
         getIssues: () => dispatch(getIssues()),
         updateIssue: (number, body) => dispatch(updateIssue(number, body)),
         deleteIssues: (number) => dispatch(deleteIssues(number))
