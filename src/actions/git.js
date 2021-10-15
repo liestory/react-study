@@ -27,7 +27,8 @@ export const createIssue = (title, body) => {
 
             }
         ).then((res) => {
-            dispatch(setCreateIssueState(res.data))
+            // dispatch(setCreateIssueState(res.data))
+            dispatch(getIssues())
         })
     }
 }
@@ -60,9 +61,9 @@ export const getIssues = () => {
                 },
             }
         ).then((res) => {
-            console.log("res", res.data)
+            // console.log("res", res.data)
             dispatch(setGetIssueState(res.data))
-            console.log("dispatch",)
+            // console.log("dispatch",)
         })
     }
 }

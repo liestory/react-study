@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
@@ -9,12 +9,16 @@ function CreateIssueModal(props) {
     const [title, setTitle] = useState("");
     const [comment, setComment] = useState("");
     const [processing, setProcessing] = useState(false);
+
+
+
+
     const clickAndWaitIssue = () => {
         setProcessing(true)
-        const stash = props;
+        console.log("еще не  прошел")
         props.createIssue(title, comment);
-
-        return
+        props.closeModal()
+        return props.onHide
     }
 
     return (
