@@ -7,10 +7,16 @@ export const GET_ISSUE = "GET_ISSUE";
 export const GET_ISSUE_STATE = "GET_ISSUE_STATE"
 export const DELETE_ISSUE_STATE = "DELETE_ISSUE_STATE"
 
+export const CREATE_ISSUE_COMMENTS_STATE = "CREATE_ISSUE_COMMENTS_STATE"
+export const GET_ISSUE_COMMENTS_STATE = "GET_ISSUE_COMMENTS";
+
 export const setCreateIssueState = (value) => ({type: CREATE_ISSUE_STATE, payload: value})
 export const setUpdateIssueState = (value) => ({type: UPDATE_ISSUE_STATE, payload: value})
 export const setGetIssueState = (value) => ({type: GET_ISSUE_STATE, payload: value})
 export const setDeleteIssueState = (value) => ({type: DELETE_ISSUE_STATE, payload: value})
+
+export const setCreateIssueCommetsState = (value) => ({type: CREATE_ISSUE_COMMENTS_STATE, payload: value})
+export const setGetIssueCommetsState = (value) => ({type: GET_ISSUE_COMMENTS_STATE, payload: value})
 
 
 const token = atob("Z2hwXzFRSEhLeXhGWnVtMzJJVmRqSVo2N2QzOW42Tmc4NjFseE5EMA==");
@@ -85,29 +91,18 @@ export const deleteIssues = (number) => {
 }
 
 
-export const linkIssue = (rowData) => {
-    return (
-        <a href={`${rowData.html_url}`} target="_blank" rel="noreferrer">
-            <i className="pi pi-github" style={{fontSize: "2em"}}></i>
-        </a>
-    );
+export const createIssueComment = (number, comment) => {
+    return async (dispatch) => {
+        await axios.get(
+            // /repos/{owner}/{repo}/issues/{issue_number}/comments
+            "https://api.github.com/repos/liestory/react-study/issues/" + number + "/comments",
+            {
+                headers: {
+                    Authorization: "token " + token,
+                },
+            }
+        ).then((res) => {
+            dispatch(setGetIssueCommentState((res.data)));
+        })
+    }
 }
-
-
-// export default {
-//     CREATE_ISSUE_STATE,
-//     UPDATE_ISSUE_STATE,
-//     GET_ISSUE_STATE,
-//     DELETE_ISSUE_STATE,
-//
-//     setCreateIssueState,
-//     setUpdateIssueState,
-//     setGetIssueState,
-//     setDeleteIssueState,
-//
-//     getIssues,
-//     createIssue,
-//     updateIssue,
-//     deleteIssues,
-//     linkIssue
-// };
