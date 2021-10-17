@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import WaitForCloseModal from "./modals/WaitForCloseModal";
+import WaitForCloseModal from "./WaitForCloseModal";
 
 function CreateIssueModal(props) {
     const [title, setTitle] = useState("");

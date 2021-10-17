@@ -7,16 +7,20 @@ export const GET_ISSUE = "GET_ISSUE";
 export const GET_ISSUE_STATE = "GET_ISSUE_STATE"
 export const DELETE_ISSUE_STATE = "DELETE_ISSUE_STATE"
 
-export const CREATE_ISSUE_COMMENTS_STATE = "CREATE_ISSUE_COMMENTS_STATE"
-export const GET_ISSUE_COMMENTS_STATE = "GET_ISSUE_COMMENTS";
+export const CREATE_ISSUE_COMMENT_STATE = "CREATE_ISSUE_COMMENTS_STATE"
+export const GET_ISSUE_COMMENT_STATE = "GET_ISSUE_COMMENTS";
+export const UPDATE_ISSUE_COMMENT_STATE = "CREATE_ISSUE_COMMENTS_STATE"
+export const DELETE_ISSUE_COMMENT_STATE = "GET_ISSUE_COMMENTS";
 
 export const setCreateIssueState = (value) => ({type: CREATE_ISSUE_STATE, payload: value})
 export const setUpdateIssueState = (value) => ({type: UPDATE_ISSUE_STATE, payload: value})
 export const setGetIssueState = (value) => ({type: GET_ISSUE_STATE, payload: value})
 export const setDeleteIssueState = (value) => ({type: DELETE_ISSUE_STATE, payload: value})
 
-export const setCreateIssueCommetsState = (value) => ({type: CREATE_ISSUE_COMMENTS_STATE, payload: value})
-export const setGetIssueCommetsState = (value) => ({type: GET_ISSUE_COMMENTS_STATE, payload: value})
+export const setCreateIssueCommentState = (value) => ({type: CREATE_ISSUE_COMMENT_STATE, payload: value})
+export const setGetIssueCommentState = (value) => ({type: GET_ISSUE_COMMENT_STATE, payload: value})
+export const setUpdateIssueCommentState = (value) => ({type: UPDATE_ISSUE_COMMENT_STATE, payload: value})
+export const setDeleteIssueCommentState = (value) => ({type: DELETE_ISSUE_COMMENT_STATE, payload: value})
 
 
 const token = atob("Z2hwXzFRSEhLeXhGWnVtMzJJVmRqSVo2N2QzOW42Tmc4NjFseE5EMA==");
@@ -91,7 +95,7 @@ export const deleteIssues = (number) => {
 }
 
 
-export const createIssueComment = (number, comment) => {
+export const createIssueComment = (comment) => {
     return async (dispatch) => {
         await axios.get(
             // /repos/{owner}/{repo}/issues/{issue_number}/comments
@@ -105,4 +109,20 @@ export const createIssueComment = (number, comment) => {
             dispatch(setGetIssueCommentState((res.data)));
         })
     }
+}
+export const getIssueComment = () => {
+    return async (dispatch) => {
+        await axios.get(
+            // /repos/{owner}/{repo}/issues/{issue_number}/comments
+            "https://api.github.com/repos/liestory/react-study/issues/" + number + "/comments",
+            {
+                headers: {
+                    Authorization: "token " + token,
+                },
+            }
+        ).then((res) => {
+            dispatch(setGetIssueCommentState((res.data)));
+        })
+    }
+
 }

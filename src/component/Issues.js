@@ -1,12 +1,12 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table'
-import Linkify from 'react-linkify';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
-import CreateIssueModal from "./CreateIssueModal";
+import CreateIssueModal from "./modals/CreateIssueModal";
 import * as Icon from "react-bootstrap-icons";
+
 
 
 class Issues extends React.PureComponent {
@@ -82,7 +82,7 @@ class Issues extends React.PureComponent {
                 <Table responsive="sm" variant="light">
                     <thead>
                     <tr>
-
+                        <th>id</th>
                         <th>статус обращения</th>
                         <th>дата и время создания</th>
                         <th>number</th>
@@ -96,6 +96,7 @@ class Issues extends React.PureComponent {
                     <tbody>
                     {this.state.issues !== null && this.state.issues.map((result) => (
                             <tr key={result.id}>
+                                <td>{result.id}</td>
                                 <td>{result.state}</td>
                                 <td>{result.created_at}</td>
                                 <td>{result.number}</td>
