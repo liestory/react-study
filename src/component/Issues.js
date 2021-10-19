@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import CreateIssueModal from "./modals/CreateIssueModal";
 import * as Icon from "react-bootstrap-icons";
-
+import CreateCommentContainer from "./modals/CreateCommentModalContainer";
 
 
 class Issues extends React.PureComponent {
@@ -19,6 +19,8 @@ class Issues extends React.PureComponent {
             issues: null,
             results: null,
             createIssueModal: false,
+            createCommentModal: false,
+            currentNumberIssue: null,
         }
     }
 
@@ -39,12 +41,25 @@ class Issues extends React.PureComponent {
         console.log("componentDidUpdate ", this.state.issues);
     }
 
-    openModal = () => {
-        this.setState({createIssueModal: true})
+    openCommentModal(number) {
+
+        console.log("4pyk")
+        this.setState({
+            createCommentModal: true,
+            currentNumberIssue: number
+        })
+    }
+
+    closeCommentModal = () => {
+        this.setState({
+            createCommentModal: false
+        })
     }
 
     closeModal = () => {
-        this.setState({createIssueModal: false})
+        this.setState({
+            createIssueModal: false
+        })
         console.log("check")
     }
 
@@ -79,6 +94,14 @@ class Issues extends React.PureComponent {
 
                 />
 
+                <CreateCommentContainer
+                    show={this.state.createCommentModal}
+                    onHide={!this.state.createCommentModal}
+
+                    number={this.state.currentNumberIssue}
+
+                />
+
                 <Table responsive="sm" variant="light">
                     <thead>
                     <tr>
@@ -104,11 +127,12 @@ class Issues extends React.PureComponent {
 
                                 <td>
                                     <Button
-                                        style={{ margin: "3px" }}
+                                        style={{margin: "3px"}}
                                         variant="outline-primary"
-                                        href={result.user.html_url}
+                                        // href={result.user.html_url}
+                                        onClick={() => this.openCommentModal(result.number)}
                                     >
-                                        <Icon.Chat />
+                                        <Icon.Chat/>
                                     </Button>
 
                                 </td>

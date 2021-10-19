@@ -11,12 +11,15 @@ function CreateIssueModal(props) {
     const [processing, setProcessing] = useState(false);
 
 
-
-
-    const clickAndWaitIssue = () => {
+    const clickAndWaitIssueModal = () => {
         setProcessing(true)
         console.log("еще не  прошел")
         props.createIssue(title, comment);
+        props.closeModal()
+        return props.onHide
+    }
+
+    const closeIssueModal = () => {
         props.closeModal()
         return props.onHide
     }
@@ -51,17 +54,17 @@ function CreateIssueModal(props) {
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="primary" type="submit" onClick={clickAndWaitIssue}>
+                        <Button variant="primary" type="submit" onClick={clickAndWaitIssueModal}>
                             Submit
                         </Button>
-                        <Button onClick={props.onHide}>Close</Button>
+                        <Button onClick={closeIssueModal}>Close</Button>
                     </Modal.Footer>
                 </> : <>
                     <Modal.Body>
                         <WaitForCloseModal/>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={props.onHide}>Close</Button>
+                        <Button onClick={closeIssueModal}>Close</Button>
                     </Modal.Footer>
                 </>
             }

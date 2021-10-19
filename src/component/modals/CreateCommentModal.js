@@ -1,25 +1,26 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import WaitForCloseModal from "./WaitForCloseModal";
+import Table from 'react-bootstrap/Table'
 
 function CreateCommentModal(props) {
     const [title, setTitle] = useState("");
-    const [comment, setComment] = useState("");
+    const [comments, setComments] = useState();
     const [processing, setProcessing] = useState(false);
 
 
+    // useEffect(() => {
+    //     props.getIssueComment(props.number);
+    //     setComments(props.comments);
+    //     console.log("comments", comments);
+    // });
 
-
-    const clickAndWaitIssue = () => {
-        setProcessing(true)
-        console.log("еще не  прошел")
-        props.createIssue(title, comment);
-        props.closeModal()
-        return props.onHide
-    }
+    // const clickAndWaitIssue = () => {
+    //
+    // }
 
     return (
         <Modal
@@ -30,13 +31,32 @@ function CreateCommentModal(props) {
         >
             <Modal.Header>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Создание Issue
+                    Список комментариев
                 </Modal.Title>
             </Modal.Header>
 
             {!processing ?
                 <>
                     <Modal.Body>
+                        <Table responsive="sm" variant="light">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>комментари</th>
+                                <th>дата и время создания</th>
+                                <th>number</th>
+                                <th>название</th>
+                                {/*<th>имя и ссылка на профиль пользователя создавшего обращение</th>*/}
+                                <th></th>
+                                <th></th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </Table>
+
+
                         <Form>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Issue </Form.Label>
@@ -51,9 +71,9 @@ function CreateCommentModal(props) {
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="primary" type="submit" onClick={clickAndWaitIssue}>
-                            Submit
-                        </Button>
+                        {/*<Button variant="primary" type="submit" onClick={clickAndWaitIssue}>*/}
+                        {/*    Submit*/}
+                        {/*</Button>*/}
                         <Button onClick={props.onHide}>Close</Button>
                     </Modal.Footer>
                 </> : <>

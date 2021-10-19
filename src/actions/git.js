@@ -95,7 +95,7 @@ export const deleteIssues = (number) => {
 }
 
 
-export const createIssueComment = (comment) => {
+export const createIssueComment = (number, comment) => {
     return async (dispatch) => {
         await axios.get(
             // /repos/{owner}/{repo}/issues/{issue_number}/comments
@@ -110,7 +110,7 @@ export const createIssueComment = (comment) => {
         })
     }
 }
-export const getIssueComment = () => {
+export const getIssueComment = (number) => {
     return async (dispatch) => {
         await axios.get(
             // /repos/{owner}/{repo}/issues/{issue_number}/comments
