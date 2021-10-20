@@ -22,6 +22,12 @@ function CreateCommentModal(props) {
     //
     // }
 
+
+    const closeCommentModal = () => {
+        props.closeCommentModal()
+        return props.onHide
+    }
+
     return (
         <Modal
             {...props}
@@ -74,14 +80,14 @@ function CreateCommentModal(props) {
                         {/*<Button variant="primary" type="submit" onClick={clickAndWaitIssue}>*/}
                         {/*    Submit*/}
                         {/*</Button>*/}
-                        <Button onClick={props.onHide}>Close</Button>
+                        <Button onClick={closeCommentModal}>Close</Button>
                     </Modal.Footer>
                 </> : <>
                     <Modal.Body>
                         <WaitForCloseModal/>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={props.onHide}>Close</Button>
+                        <Button onClick={closeCommentModal}>Close</Button>
                     </Modal.Footer>
                 </>
             }

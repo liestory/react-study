@@ -99,6 +99,7 @@ class Issues extends React.PureComponent {
                     onHide={!this.state.createCommentModal}
 
                     number={this.state.currentNumberIssue}
+                    closeCommentModal={this.closeCommentModal}
 
                 />
 
