@@ -5,13 +5,13 @@ import {withRouter} from "react-router";
 import {
     createIssue,
     getIssues, updateIssue,
-    deleteIssues
+    deleteIssues,
 } from "../actions/git";
 
 
 const mapStateToProps = (state) => {
     return {
-        issues: state.gitRed.issues
+        issues: state.gitRed.issues,
     }
 }
 

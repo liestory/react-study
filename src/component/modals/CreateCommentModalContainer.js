@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {getIssueComment,} from "../../actions/git";
+import {createIssueComment, getIssueComment} from "../../actions/git";
 import CreateCommentModal from "./CreateCommentModal";
 
 

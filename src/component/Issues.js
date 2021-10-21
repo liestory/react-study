@@ -5,8 +5,8 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import CreateIssueModal from "./modals/CreateIssueModal";
-import * as Icon from "react-bootstrap-icons";
 import CreateCommentContainer from "./modals/CreateCommentModalContainer";
+import * as Icon from "react-bootstrap-icons";
 
 
 class Issues extends React.PureComponent {
@@ -20,7 +20,9 @@ class Issues extends React.PureComponent {
             results: null,
             createIssueModal: false,
             createCommentModal: false,
-            currentNumberIssue: null,
+            currentCommentIssue: null,
+            onMountComments: false,
+
         }
     }
 
@@ -42,17 +44,17 @@ class Issues extends React.PureComponent {
     }
 
     openCommentModal(number) {
-
-        console.log("4pyk")
         this.setState({
             createCommentModal: true,
-            currentNumberIssue: number
+            currentNumberIssue: number,
+            onMountComments: true,
         })
     }
 
     closeCommentModal = () => {
         this.setState({
-            createCommentModal: false
+            createCommentModal: false,
+            onMountComments: false
         })
     }
 
@@ -94,14 +96,15 @@ class Issues extends React.PureComponent {
 
                 />
 
-                <CreateCommentContainer
+                {this.state.createCommentModal && <CreateCommentContainer
                     show={this.state.createCommentModal}
                     onHide={!this.state.createCommentModal}
 
                     number={this.state.currentNumberIssue}
                     closeCommentModal={this.closeCommentModal}
+                    onMountComments = {this.state.onMountComments}
 
-                />
+                />}
 
                 <Table responsive="sm" variant="light">
                     <thead>
@@ -122,7 +125,7 @@ class Issues extends React.PureComponent {
                             <tr key={result.id}>
                                 <td>{result.id}</td>
                                 <td>{result.state}</td>
-                                <td>{result.created_at}</td>
+                                <td>{new Date(result.created_at).toLocaleString()}</td>
                                 <td>{result.number}</td>
                                 <td>{result.title}</td>
 
