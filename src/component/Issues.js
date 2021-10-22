@@ -62,7 +62,6 @@ class Issues extends React.PureComponent {
         this.setState({
             createIssueModal: false
         })
-        console.log("check")
     }
 
 
@@ -133,20 +132,20 @@ class Issues extends React.PureComponent {
                                     <Button
                                         style={{margin: "3px"}}
                                         variant="outline-primary"
-                                        // href={result.user.html_url}
                                         onClick={() => this.openCommentModal(result.number)}
                                     >
                                         <Icon.Chat/>
                                     </Button>
 
                                 </td>
-                                <td>                                    <Button
-                                    style={{ margin: "3px" }}
-                                    variant="outline-primary"
-                                    href={result.user.html_url}
-                                >
-                                    <Icon.Github />
-                                </Button></td>
+                                <td>
+                                    <Button
+                                        style={{margin: "3px"}}
+                                        variant="outline-primary"
+                                        href={result.user.html_url}
+                                    >
+                                        <Icon.Github/>
+                                    </Button></td>
                             </tr>
                     ))}
 

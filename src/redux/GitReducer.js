@@ -9,7 +9,8 @@ import {
 } from "../actions/git"
 
 const initialState = {
-    issues: null
+    issues: null,
+    comments: null
 };
 
 

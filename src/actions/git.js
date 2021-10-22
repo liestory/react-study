@@ -81,7 +81,7 @@ export const getIssues = () => {
 
 export const deleteIssues = (number) => {
     return async (dispatch) => {
-        await axios.get(
+        await axios.post(
             "https://api.github.com/repos/liestory/react-study/issues/" + number,
             {
                 headers: {
@@ -98,7 +98,7 @@ export const deleteIssues = (number) => {
 export const createIssueComment = (number, comment) => {
     console.log("пришел в чпоку", number, comment)
     return async (dispatch) => {
-        await axios.get(
+        await axios.post(
             // /repos/{owner}/{repo}/issues/{issue_number}/comments'
             "https://api.github.com/repos/liestory/react-study/issues/" + number + "/comments",
 
@@ -109,11 +109,14 @@ export const createIssueComment = (number, comment) => {
                 },
             }
         ).then((res) => {
+            console.log("res", res)
             dispatch(getIssueComment(number));
             console.log("чпоку", res.data)
         })
     }
 }
+
+
 export const  getIssueComment = (number) => {
     return async (dispatch) => {
         await axios.get(

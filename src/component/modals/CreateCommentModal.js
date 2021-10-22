@@ -13,30 +13,24 @@ const CreateCommentModal = (props) => {
 
 
     useEffect(() => {
-        console.log("props", props)
         if (props.onMountComments) {
             setProcessing(true);
             props.getIssueComment(props.number);
-            console.log("propscomments", props.comments)
 
             if (props.comments !== null) {
                 setComments(props.comments);
                 setProcessing(false)
-                console.log(comments)
                 return
             }
         }
     });
 
     const clickAndWaitComment = () => {
-        console.log("body", body);
         setProcessing(true);
         let check = props.createIssueComment(props.number, body);
         console.log("check", check)
         setComments(props.comments);
-        console.log("comments", comments);
         if (comments !== null) {
-            console.log("comments into", comments)
             setProcessing(false)
             return
         }
