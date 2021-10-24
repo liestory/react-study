@@ -79,9 +79,8 @@ export const getIssues = () => {
 }
 
 
-export const closeIssue = (number, comment) => {
+export const closeIssue = (number) => {
     return async (dispatch) => {
-        createIssueComment(number, comment)
         await axios.post(
             "https://api.github.com/repos/liestory/react-study/issues/" + number,
             {state: "closed"},
@@ -112,7 +111,6 @@ export const createIssueComment = (number, comment) => {
         ).then((res) => {
             console.log("res", res)
             dispatch(getIssueComment(number));
-            console.log("чпоку", res.data)
         })
     }
 }

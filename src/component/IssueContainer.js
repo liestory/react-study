@@ -5,7 +5,7 @@ import {withRouter} from "react-router";
 import {
     createIssue,
     getIssues, updateIssue,
-    closeIssue,
+    closeIssue, createIssueComment,
 } from "../actions/git";
 
 
@@ -20,7 +20,8 @@ const mapDispatchToProps = (dispatch) => {
         createIssue: (title, body) => dispatch(createIssue(title, body)),
         getIssues: () => dispatch(getIssues()),
         updateIssue: (number, body) => dispatch(updateIssue(number, body)),
-        closeIssue: (number, comment) => dispatch(closeIssue(number, comment))
+        closeIssue: (number) => dispatch(closeIssue(number)),
+        createIssueCommentModal: (number, comment) => dispatch(createIssueComment(number, comment)),
 
     }
 }

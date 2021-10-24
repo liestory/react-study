@@ -32,7 +32,6 @@ class Issues extends React.PureComponent {
 
     componentDidMount() {
         this.props.getIssues();
-
         this.setState({
             issues: this.props.issues
         })
@@ -129,6 +128,7 @@ class Issues extends React.PureComponent {
                     onHide={!this.state.closeIssueModal}
 
                     number={this.state.currentNumberIssue}
+                    createIssueCommentModal = {this.props.createIssueCommentModal}
                     closeIssue={this.props.closeIssue}
                     closeModal={this.closeIssueModal}
 

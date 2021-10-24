@@ -6,7 +6,6 @@ import Form from 'react-bootstrap/Form'
 import WaitForCloseModal from "./WaitForCloseModal";
 
 function CloseIssueModal(props) {
-    const [title, setTitle] = useState("");
     const [comment, setComment] = useState("");
     const [processing, setProcessing] = useState(false);
 
@@ -14,6 +13,8 @@ function CloseIssueModal(props) {
     const clickCloseAndWaitComment = () => {
         setProcessing(true)
         console.log("еще не  прошел")
+        let check = props.createIssueCommentModal(props.number, comment)
+        console.log("check", check)
         props.closeIssue(props.number, comment);
         props.closeModal()
         setProcessing(false)

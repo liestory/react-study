@@ -27,8 +27,7 @@ const CreateCommentModal = (props) => {
 
     const clickAndWaitComment = () => {
         setProcessing(true);
-        let check = props.createIssueComment(props.number, body);
-        console.log("check", check)
+        props.createIssueComment(props.number, body);
         setComments(props.comments);
         if (comments !== null) {
             setProcessing(false)
@@ -65,7 +64,6 @@ const CreateCommentModal = (props) => {
                                 <th>логин</th>
                                 <th>комментари</th>
                                 <th>дата и время создания</th>
-                                <th>дата и время обновления</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -76,7 +74,6 @@ const CreateCommentModal = (props) => {
                                     <td>{result.user.login}</td>
                                     <td>{result.body}</td>
                                     <td>{new Date(result.created_at).toLocaleString()}</td>
-                                    <td>{new Date(result.updated_at).toLocaleString()}</td>
                                 </tr>
                             )))}
                             </tbody>
