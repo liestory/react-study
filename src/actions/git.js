@@ -5,7 +5,7 @@ export const CREATE_ISSUE_STATE = "CREATE_ISSUE_STATE";
 export const UPDATE_ISSUE_STATE = "UPDATE_ISSUE_STATE";
 export const GET_ISSUE = "GET_ISSUE";
 export const GET_ISSUE_STATE = "GET_ISSUE_STATE"
-export const DELETE_ISSUE_STATE = "DELETE_ISSUE_STATE"
+export const CLOSE_ISSUE_STATE = "CLOSE_ISSUE_STATE"
 
 export const CREATE_ISSUE_COMMENT_STATE = "CREATE_ISSUE_COMMENTS_STATE"
 export const GET_ISSUE_COMMENT_STATE = "GET_ISSUE_COMMENTS";
@@ -15,7 +15,7 @@ export const DELETE_ISSUE_COMMENT_STATE = "GET_ISSUE_COMMENTS";
 export const setCreateIssueState = (value) => ({type: CREATE_ISSUE_STATE, payload: value})
 export const setUpdateIssueState = (value) => ({type: UPDATE_ISSUE_STATE, payload: value})
 export const setGetIssueState = (value) => ({type: GET_ISSUE_STATE, payload: value})
-export const setDeleteIssueState = (value) => ({type: DELETE_ISSUE_STATE, payload: value})
+export const setCloseIssueState = (value) => ({type: CLOSE_ISSUE_STATE, payload: value})
 
 export const setCreateIssueCommentState = (value) => ({type: CREATE_ISSUE_COMMENT_STATE, payload: value})
 export const setGetIssueCommentState = (value) => ({type: GET_ISSUE_COMMENT_STATE, payload: value})
@@ -46,7 +46,7 @@ export const createIssue = (title, body) => {
 
 export const updateIssue = (number, body) => {
     return async (dispatch) => {
-        await axios.get(
+        await axios.post(
             "https://api.github.com/repos/liestory/react-study/issues/" + number,
             {body: body},
             {
@@ -79,24 +79,25 @@ export const getIssues = () => {
 }
 
 
-export const deleteIssues = (number) => {
+export const closeIssue = (number, comment) => {
     return async (dispatch) => {
+        createIssueComment(number, comment)
         await axios.post(
             "https://api.github.com/repos/liestory/react-study/issues/" + number,
+            {state: "closed"},
             {
                 headers: {
                     Authorization: "token " + token,
                 },
             }
         ).then((res) => {
-            dispatch(setGetIssueState(res.data))
+            dispatch(getIssues())
         })
     }
 }
 
 
 export const createIssueComment = (number, comment) => {
-    console.log("пришел в чпоку", number, comment)
     return async (dispatch) => {
         await axios.post(
             // /repos/{owner}/{repo}/issues/{issue_number}/comments'

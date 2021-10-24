@@ -7,6 +7,7 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import CreateIssueModal from "./modals/CreateIssueModal";
 import CreateCommentContainer from "./modals/CreateCommentModalContainer";
 import * as Icon from "react-bootstrap-icons";
+import CloseIssueModal from "./modals/CloseIssueModal";
 
 
 class Issues extends React.PureComponent {
@@ -22,6 +23,8 @@ class Issues extends React.PureComponent {
             createCommentModal: false,
             currentCommentIssue: null,
             onMountComments: false,
+            closeIssueModal: false,
+            onMountCloseIssue: false,
 
         }
     }
@@ -73,9 +76,25 @@ class Issues extends React.PureComponent {
         console.log("refreshIssue ", this.state.issues);
     }
 
+
+    openCloseIssueModal(number) {
+        this.setState({
+            closeIssueModal: true,
+            currentNumberIssue: number,
+            onMountCloseIssue: true,
+        })
+    }
+
+    closeIssueModal =() => {
+        this.setState({
+            closeIssueModal: false,
+            onMountCloseIssue: false
+        })
+    }
+
     render() {
         return (
-            <div style={{'margin': '10px'}}>
+            <div style={{margin: '10px'}}>
                 <ButtonToolbar aria-label="Toolbar with button groups">
                     <ButtonGroup size="lg" aria-label="Basic example">
                         <Button variant="secondary" onClick={() => this.setState({createIssueModal: true})}>Create
@@ -101,7 +120,17 @@ class Issues extends React.PureComponent {
 
                     number={this.state.currentNumberIssue}
                     closeCommentModal={this.closeCommentModal}
-                    onMountComments = {this.state.onMountComments}
+                    onMountComments={this.state.onMountComments}
+
+                />}
+
+                {this.state.onMountCloseIssue && <CloseIssueModal
+                    show={this.state.closeIssueModal}
+                    onHide={!this.state.closeIssueModal}
+
+                    number={this.state.currentNumberIssue}
+                    closeIssue={this.props.closeIssue}
+                    closeModal={this.closeIssueModal}
 
                 />}
 
@@ -113,10 +142,10 @@ class Issues extends React.PureComponent {
                         <th>дата и время создания</th>
                         <th>number</th>
                         <th>название</th>
-                        {/*<th>имя и ссылка на профиль пользователя создавшего обращение</th>*/}
+                        <th>описание</th>
                         <th></th>
                         <th></th>
-
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -127,12 +156,13 @@ class Issues extends React.PureComponent {
                                 <td>{new Date(result.created_at).toLocaleString()}</td>
                                 <td>{result.number}</td>
                                 <td>{result.title}</td>
-
+                                <td>{result.body}</td>
                                 <td>
                                     <Button
                                         style={{margin: "3px"}}
-                                        variant="outline-primary"
+                                        variant="outline-secondary"
                                         onClick={() => this.openCommentModal(result.number)}
+                                        title="Добавить комментарий"
                                     >
                                         <Icon.Chat/>
                                     </Button>
@@ -141,8 +171,19 @@ class Issues extends React.PureComponent {
                                 <td>
                                     <Button
                                         style={{margin: "3px"}}
-                                        variant="outline-primary"
+                                        variant="outline-secondary"
+                                        onClick={() => this.openCloseIssueModal(result.number)}
+                                        title="Закрыть Issue"
+                                    >
+                                        <Icon.JournalCheck/>
+                                    </Button>
+                                </td>
+                                <td>
+                                    <Button
+                                        style={{margin: "3px"}}
+                                        variant="outline-secondary"
                                         href={result.user.html_url}
+                                        title="Ссылка на Github"
                                     >
                                         <Icon.Github/>
                                     </Button></td>

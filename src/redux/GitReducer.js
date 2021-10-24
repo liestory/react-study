@@ -1,7 +1,7 @@
 import {
     CREATE_ISSUE_COMMENT_STATE,
     CREATE_ISSUE_STATE,
-    DELETE_ISSUE_STATE,
+    CLOSE_ISSUE_STATE,
     GET_ISSUE,
     GET_ISSUE_COMMENT_STATE,
     GET_ISSUE_STATE,
@@ -37,7 +37,7 @@ const gitReducer = (state = initialState, action) => {
                 ...state,
                 issues: action.payload
             };
-        case DELETE_ISSUE_STATE:
+        case CLOSE_ISSUE_STATE:
             return {
                 ...state,
                 issues: action.payload
