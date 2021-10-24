@@ -64,7 +64,7 @@ export const updateIssue = (number, body) => {
 export const getIssues = () => {
     return async (dispatch) => {
         await axios.get(
-            "https://api.github.com/repos/liestory/react-study/issues?state=all",
+            "https://api.github.com/repos/liestory/react-study/issues?state=all&per_page=99",
             {
                 headers: {
                     Authorization: "token " + token,
